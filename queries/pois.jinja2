@@ -7,17 +7,19 @@ SELECT
     cuisine,
     religion,
     sport,
-    transit_routes,
+    (transit_routes).score AS mz_transit_score,
+    (transit_routes).root_relation_id AS mz_transit_root_relation_id,
+    (transit_routes).train_routes AS train_routes,
+    (transit_routes).subway_routes AS subway_routes,
+    (transit_routes).light_rail_routes AS light_rail_routes,
+    (transit_routes).tram_routes AS tram_routes,
     ref,
     attraction,
     zoo,
     tags->'exit_to' AS exit_to,
     aeroway,
     %#tags AS tags,
-    COALESCE("aerialway", "aeroway", "amenity", "barrier", "craft", "emergency",
-             "tags"->'healthcare', "highway", "historic", "leisure", "lock",
-             "man_made", "natural", "office", "power", "railway",
-             "tags"->'rental', "shop", "tourism", "waterway") AS kind
+    kind
 
 FROM (
 
@@ -33,8 +35,9 @@ FROM (
     CASE
       WHEN railway='station' AND osm_id > 0
         THEN mz_calculate_transit_routes(osm_id, NULL)
-      ELSE NULL::text[]
+      ELSE NULL
     END AS transit_routes,
+    mz_calculate_kind_pois(planet_osm_point.*) AS kind,
     tags
 
   FROM
@@ -62,8 +65,9 @@ UNION ALL
     CASE
       WHEN railway='station' AND osm_id > 0
         THEN mz_calculate_transit_routes(NULL, osm_id)
-      ELSE NULL::text[]
+      ELSE NULL
     END AS transit_routes,
+    mz_calculate_kind_pois(planet_osm_polygon.*) AS kind,
     tags
 
   FROM
