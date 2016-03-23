@@ -70,6 +70,21 @@ Read the full details in the project [CHANGELOG](https://github.com/mapzen/vecto
 
 Ordering of features - which ones draw "on top of" other features - can be an important feature of display maps. To help out with this, we export a `sort_key` property on some features which suggests in what order the features should appear. Lower numbers mean that features should appear "towards the back" and higher numbers mean "towards the front". These numbers are consistent across layers. The layers which include `sort_key` on their features are: `boundaries`, `buildings`, `earth`, `landuse`, `roads`, `transit` and `water`.
 
+To facilitate **data visualization** overlays and underlays, the following client-side `order` ranges are suggested:
+
+* `0-9`: Under everything. _Tip: disable earth layer._
+* `190-199`: Under water. Above earth and most landuse.
+* `290-299`: Under roads. Above borders, water, landuse, and earth. **Your classic "underlay".**
+* `490-499`: Over all line and polygon features. Under map labels (icons and text), under UI elements (like routeline and search result pins). **Your classic raster map overlay.**  
+
+**Tangram scene file example:**
+
+```
+draw:
+    polygons:
+        order: 490
+```
+
 ### Layer reference
 
 Mapzen vector tiles include 9 layers:   
@@ -366,6 +381,7 @@ To improve performance, some road segments are merged at low and mid-zooms. To f
 * `ferry`: See kind list below.
 * `highway`: See kind list below.
 * `is_bridge`: `yes` or `no`
+* `is_bus_route`: If present and `true`, then buses travel down this road. This property is determined based on whether the road is part of an OSM bus route relation.
 * `is_link`: `yes` or `no`
 * `is_tunnel`: `yes` or `no`
 * `leisure`: See kind list below.
@@ -439,7 +455,7 @@ Railway values in this layer include: `rail`, `tram`, `light_rail`, `narrow_gaug
 * Layer name: `transit`
 * Geometry types: `line`, `polygon`
 
-Transit line features from OpenStreetMap start appearing at zoom 6+ for basic rail kind of `train`. Then `subway`,`light_rail`, and `tram` are added at zoom 10+. Platform polygons are added zoom 14+.
+Transit line features from OpenStreetMap start appearing at zoom 5+ for national trains, with regional trains addded at zoom 6+. Then `subway`,`light_rail`, and `tram` are added at zoom 10+. `funicular` and `monorail` features are added at zoom 12+. Platform polygons are added zoom 14+.
 
 _TIP: If you're looking for transit `station` and `station_entrance` features, look in the `pois` layer instead._
 

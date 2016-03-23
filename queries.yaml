@@ -117,6 +117,7 @@ layers:
       - TileStache.Goodies.VecTiles.transform.normalize_medical_kind
       - TileStache.Goodies.VecTiles.transform.add_state_to_stations
       - TileStache.Goodies.VecTiles.transform.tags_name_i18n
+      - TileStache.Goodies.VecTiles.transform.add_uic_ref
       - TileStache.Goodies.VecTiles.transform.tags_remove
       - TileStache.Goodies.VecTiles.transform.add_id_to_properties
       - TileStache.Goodies.VecTiles.transform.detect_osm_relation
@@ -142,11 +143,12 @@ layers:
       - TileStache.Goodies.VecTiles.transform.remove_feature_id
   transit:
     template: transit.jinja2
-    start_zoom: 6
+    start_zoom: 5
     geometry_types: [LineString, MultiLineString, Polygon, MultiPolygon]
     transform:
       - TileStache.Goodies.VecTiles.transform.tags_create_dict
       - TileStache.Goodies.VecTiles.transform.tags_name_i18n
+      - TileStache.Goodies.VecTiles.transform.add_uic_ref
       - TileStache.Goodies.VecTiles.transform.tags_remove
       - TileStache.Goodies.VecTiles.transform.add_id_to_properties
       - TileStache.Goodies.VecTiles.transform.detect_osm_relation
@@ -311,6 +313,11 @@ post_process:
       start_zoom: 13
       where: >-
         properties.get('mz_is_building') is True
+  - fn: TileStache.Goodies.VecTiles.transform.drop_properties
+    params:
+      source_layer: landuse
+      start_zoom: 13
+      properties: [mz_is_building]
   - fn: TileStache.Goodies.VecTiles.transform.merge_duplicate_stations
     params:
       source_layer: pois
