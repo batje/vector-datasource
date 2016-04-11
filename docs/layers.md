@@ -60,11 +60,11 @@ Most Mapzen vector tile content is updated minutely from OpenStreetMap. Low and 
 
 #### Changelog
 
-The current version of Mapzen vector tiles is **v0.8.0**. Our tiles are still in active development, but we try to minimize backwards incompatable breaking changes. We're also interested in your feedback at hello@mapzen.com!
+The current version of Mapzen vector tiles is **v0.9**. Our tiles are still in active development, but we try to minimize backwards incompatable breaking changes. We're also interested in your feedback at hello@mapzen.com!
 
 If you're signed up for a [Mapzen Vector Tiles API key](https://mapzen.com/developers) you should receive an email notifying you of upcoming changes before they are rolled out to production.
 
-Read the full details in the project [CHANGELOG](https://github.com/mapzen/vector-datasource/blob/v0.8.0/CHANGELOG.md).
+Read the full details in the project [CHANGELOG](https://github.com/mapzen/vector-datasource/blob/master/CHANGELOG.md).
 
 #### Feature ordering
 
@@ -246,7 +246,7 @@ _TIP: Some `landuse` features only exist as point features in OpenStreetMap. Fin
 
 **Landuse kind values:**
 
-* `aerodrome`, `allotments`, `amusement_ride`, `animal`, `apron`, `aquarium`, `artwork`, `attraction`, `aviary`, `beach`, `breakwater`, `bridge`, `carousel`, `cemetery`, `cinema`, `college`, `commercial`, `common`, `cutline`, `dike`, `enclosure`, `farm`, `farmland`, `farmyard`, `footway`, `forest`, `fuel`, `garden`, `generator`, `glacier`, `golf_course`, `grass`, `groyne`, `hanami`, `hospital`, `industrial`, `land`, `library`, `maze`, `meadow`, `military`, `national_park`, `nature_reserve`, `park`, `park or protected land`, `parking`, `pedestrian`, `petting_zoo`, `pier`, `pitch`, `place_of_worship`, `plant`, `playground`, `prison`, `protected_area`, `quarry`, `railway`, `recreation_ground`, `residential`, `resort`, `retail`, `roller_coaster`, `runway`, `rural`, `school`, `scrub`, `sports_centre`, `stadium`, `substation`, `summer_toboggan`, `taxiway`, `theatre`, `theme_park`, `tower`, `trail_riding_station`, `university`, `urban`, `urban area`, `village_green`, `wastewater_plant`, `water_slide`, `water_works`, `wetland`, `wilderness_hut`, `wildlife_park`, `winery`, `winter_sports`, `wood`, `works`, `zoo`
+* `aerodrome`, `allotments`, `amusement_ride`, `animal`, `apron`, `aquarium`, `artwork`, `attraction`, `aviary`, `beach`, `breakwater`, `bridge`, `carousel`, `cemetery`, `cinema`, `college`, `commercial`, `common`, `cutline`, `dike`, `enclosure`, `farm`, `farmland`, `farmyard`, `footway`, `forest`, `fuel`, `garden`, `generator`, `glacier`, `golf_course`, `grass`, `groyne`, `hanami`, `hospital`, `industrial`, `land`, `library`, `maze`, `meadow`, `military`, `national_park`, `nature_reserve`, `park`, `park or protected land`, `parking`, `pedestrian`, `petting_zoo`, `pier`, `pitch`, `place_of_worship`, `plant`, `playground`, `prison`, `protected_area`, `quarry`, `railway`, `recreation_ground`, `residential`, `resort`, `retail`, `roller_coaster`, `runway`, `rural`, `school`, `scree`, `scrub`, `sports_centre`, `stadium`, `substation`, `summer_toboggan`, `taxiway`, `theatre`, `theme_park`, `tower`, `trail_riding_station`, `university`, `urban`, `urban area`, `village_green`, `wastewater_plant`, `water_slide`, `water_works`, `wetland`, `wilderness_hut`, `wildlife_park`, `winery`, `winter_sports`, `wood`, `works`, `zoo`
 
 ### Landuse labels
 
@@ -268,14 +268,12 @@ This layer is included to support legacy uses, but is not recommended for new pr
 
 Combination of OpenStreetMap `place` points, Natural Earth populated places, and Who's On First neighbourhoods.
 
-Places with `kind` values of `continent`, `ocean`, `country`, with others added starting at zoom 3 for `sea`, zoom 4 for `state`, `province`, and `city`, `town` at zoom 8. A few more each zoom are added until zoom 13+ includes, `borough`, `suburb`, `quarter`, `village`, `hamlet`, `locality`, `isolated_dwelling`, and `farm`.
+Places with `kind` values of `continent`, `country`, with others added starting at zoom 4 for `state`, `province`, and `city`, `town` at zoom 8. A few more each zoom are added until zoom 13+ includes, `borough`, `suburb`, `quarter`, `village`, `hamlet`, `locality`, `isolated_dwelling`, and `farm`.
 
 ![image](images/mapzen-vector-tile-docs-places-neighbourhoods.png)
 
 **Neighbourhoods:** [Who's On First](http://whosonfirst.mapzen.com) `neighbourhood` and `macrohood` features are added starting at zoom 12. Neighbourhoods are included one zoom earlier than their `min_zoom`, and stay included 1 zoom past their `max_zoom`.
 
-
-**Gotchas:** There are a few water label features (`ocean`, `sea`) included in this layer, they will be moved to the `water` layer in a future release.
 
 **Place properties (common):**
 
@@ -297,7 +295,7 @@ Places with `kind` values of `continent`, `ocean`, `country`, with others added 
 
 **Place kind values:**
 
-* `Admin-0 capital alt`, `Admin-0 capital`, `Admin-0 region capital`, `Admin-1 capital`, `Admin-1 region capital`, `borough`, `city`, `continent`, `country`, `farm`, `hamlet`, `Historic place`, `isolated_dwelling`, `locality`, `macrohood`, `Meteorological Station`, `neighbourhood`, `ocean`, `Populated place`, `province`, `quarter`, `Scientific station`, `sea`, `state`, `suburb`, `town`, `village`
+* `Admin-0 capital alt`, `Admin-0 capital`, `Admin-0 region capital`, `Admin-1 capital`, `Admin-1 region capital`, `borough`, `city`, `continent`, `country`, `farm`, `hamlet`, `Historic place`, `isolated_dwelling`, `locality`, `macrohood`, `Meteorological Station`, `neighbourhood`, `Populated place`, `province`, `quarter`, `Scientific station`, `state`, `suburb`, `town`, `village`
 
 ## Points of Interest
 
@@ -347,7 +345,7 @@ Implied but not stated: `source`: `openstreetmap.org`.
 
 **POI kind values:**
 
-* `accountant`, `administrative`, `advertising_agency`, `aerodrome`, `airport`, `alcohol`, `alpine_hut`, `ambulatory_care`, `amusement_ride`, `animal`, `aquarium`, `archaeological_site`, `architect`, `are_home`, `artwork`, `assisted_living`, `association`, `atm`, `attraction`, `aviary`, `bakery`, `bank`, `bar`, `beach`, `bed_and_breakfast`, `bench`, `bicycle_parking`, `bicycle_rental`, `bicycle`, `biergarten`, `block`, `bollard`, `books`, `brewery`, `bus_station`, `bus_stop`, `butcher`, `cafe`, `camp_site`, `car_repair`, `car_sharing`, `car`, `caravan_site`, `carousel`, `carpenter`, `cave_entrance`, `chalet`, `childcare`, `childrens_centre`, `cinema`, `clinic`, `clothes`, `club`, `college`, `community_centre`, `company`, `computer`, `confectionery`, `consulting`, `convenience`, `courthouse`, `dairy_kitchen`, `day_care`, `dentist`, `department_store`, `doctors`, `doityourself`, `dressmaker`, `drinking_water`, `dry_cleaning`, `educational_institution`, `electrician`, `electronics`, `embassy`, `emergency_phone`, `employment_agency`, `enclosure`, `estate_agent`, `fashion`, `fast_food`, `ferry_terminal`, `financial`, `fire_station`, `fitness_station`, `fitness`, `florist`, `food_bank`, `ford`, `foundation`, `fuel`, `gardener`, `gate`, `generator`, `gift`, `government`, `greengrocer`, `group_home`, `guest_house`, `hairdresser`, `halt`, `hanami`, `handicraft`, `hardware`, `healthcare`, `helipad`, `hospital`, `hostel`, `hotel`, `hvac`, `ice_cream`, `information`, `insurance`, `it`, `jewelry`, `kindergarten`, `landmark`, `laundry`, `lawyer`, `level_crossing`, `library`, `lift_gate`, `lighthouse`, `lock`, `mall`, `marina`, `mast`, `maze`, `memorial`, `metal_construction`, `midwife`, `mini_roundabout`, `mobile_phone`, `motel`, `motorway_junction`, `museum`, `music`, `newspaper`, `ngo`, `notary`, `nursing_home`, `nursing_home`, `optician`, `outreach`, `painter`, `parking`, `peak`, `pet`, `petting_zoo`, `pharmacy`, `phone`, `photographer`, `photographic_laboratory`, `physician`, `picnic_site`, `place_of_worship`, `playground`, `plumber`, `police`, `political_party`, `post_box`, `post_office`, `pottery`, `power_wind`, `prison`, `pub`, `recycling`, `refugee_camp`, `religion`, `research`, `residential_home`, `resort`, `restaurant`, `roller_coaster`, `sawmill`, `school`, `shelter`, `shelter`, `shoemaker`, `ski_rental`, `ski_school`, `ski`, `slipway`, `snow_cannon`, `social_facility`, `soup_kitchen`, `sports_centre`, `sports`, `spring`, `stadium`, `station`, `stonemason`, `subway_entrance`, `summer_toboggan`, `supermarket`, `tailor`, `tax_advisor`, `telecommunication`, `telephone`, `theatre`, `theme_park`, `therapist`, `toilets`, `toilets`, `townhall`, `toys`, `trade`, `traffic_signals`, `trail_riding_station`, `tram_stop`, `travel_agent`, `tree`, `university`, `veterinary`, `viewpoint`, `volcano`, `waste_basket`, `water_slide`, `water_tower`, `wilderness_hut`, `wildlife_park`, `windmill`, `wine`, `winery`, `workshop`, `yes`, `zoo`.
+* `accountant`, `adit`, `administrative`, `advertising_agency`, `aerodrome`, `airport`, `alcohol`, `alpine_hut`, `ambulatory_care`, `amusement_ride`, `animal`, `aquarium`, `archaeological_site`, `architect`, `are_home`, `artwork`, `assisted_living`, `association`, `atm`, `attraction`, `aviary`, `bakery`, `bank`, `bar`, `beach`, `beacon`, `bed_and_breakfast`, `bench`, `bicycle_parking`, `bicycle_rental`, `bicycle`, `biergarten`, `block`, `boat_rental`, `bollard`, `books`, `brewery`, `bus_station`, `bus_stop`, `butcher`, `cafe`, `camp_site`, `car_repair`, `car_sharing`, `car`, `caravan_site`, `carousel`, `carpenter`, `cave_entrance`, `chalet`, `childcare`, `childrens_centre`, `cinema`, `clinic`, `clothes`, `club`, `college`, `community_centre`, `company`, `computer`, `confectionery`, `consulting`, `convenience`, `courthouse`, `cross`, `dairy_kitchen`, `day_care`, `dentist`, `department_store`, `doctors`, `doityourself`, `dressmaker`, `drinking_water`, `dry_cleaning`, `dune`, `educational_institution`, `egress`, `electrician`, `electronics`, `embassy`, `emergency_phone`, `employment_agency`, `enclosure`, `estate_agent`, `fashion`, `fast_food`, `ferry_terminal`, `financial`, `fire_station`, `fitness_station`, `fitness`, `florist`, `food_bank`, `ford`, `foundation`, `fuel`, `gardener`, `gate`, `generator`, `geyser`, `gift`, `government`, `greengrocer`, `group_home`, `guest_house`, `hairdresser`, `halt`, `hanami`, `handicraft`, `hardware`, `hazard`, `healthcare`, `helipad`, `hospital`, `hostel`, `hotel`, `hot_spring`, `hvac`, `ice_cream`, `information`, `insurance`, `it`, `jewelry`, `kindergarten`, `landmark`, `laundry`, `lawyer`, `level_crossing`, `library`, `lift_gate`, `lighthouse`, `lock`, `mall`, `marina`, `mast`, `maze`, `memorial`, `metal_construction`, `midwife`, `mineshaft`, `mini_roundabout`, `mobile_phone`, `motel`, `motorway_junction`, `museum`, `music`, `newspaper`, `ngo`, `notary`, `nursing_home`, `nursing_home`, `optician`, `outreach`, `painter`, `parking`, `peak`, `pet`, `petting_zoo`, `pharmacy`, `phone`, `photographer`, `photographic_laboratory`, `physician`, `picnic_site`, `place_of_worship`, `playground`, `plumber`, `police`, `political_party`, `post_box`, `post_office`, `pottery`, `power_wind`, `prison`, `pub`, `put_in`, `put_in_egress`, `rapid`, `recycling`, `refugee_camp`, `religion`, `research`, `residential_home`, `resort`, `restaurant`, `rock`, `roller_coaster`, `saddle`, `sawmill`, `school`, `shelter`, `shelter`, `shoemaker`, `sinkhole`, `ski_rental`, `ski_school`, `ski`, `slipway`, `snow_cannon`, `social_facility`, `soup_kitchen`, `sports_centre`, `sports`, `spring`, `stadium`, `station`, `stone`, `stonemason`, `subway_entrance`, `summer_toboggan`, `supermarket`, `tailor`, `tax_advisor`, `telecommunication`, `telephone`, `theatre`, `theme_park`, `therapist`, `toilets`, `toilets`, `townhall`, `toys`, `trade`, `traffic_signals`, `trailhead`, `trail_riding_station`, `tram_stop`, `travel_agent`, `tree`, `university`, `veterinary`, `viewpoint`, `volcano`, `waste_basket`, `water_slide`, `water_tower`, `water_well`, `wilderness_hut`, `wildlife_park`, `windmill`, `wine`, `winery`, `workshop`, `yes`, `zoo`.
 
 ## Roads (Transportation)
 
@@ -420,7 +418,7 @@ To improve performance, some road segments are merged at low and mid-zooms. To f
 
 ### Transportation kind values and zoom ranges
 
-**Roads** from **OpenStreetMap** are shown starting at zoom 8 with `motorway`, `trunk`, `primary`. `secondary` are added starting at zoom 10, with `motorway_link`, `tertiary` added at zoom 11. Zoom 12 sees addition of `trunk_link`, `residential`, `unclassified`, `road`). Zoom 13 adds (`primary_link`, `secondary_link`, `track`, `pedestrian`, `living_street`). Zoom 14 adds (`tertiary_link`, `minor`, `footpath`, `footway`, `steps`, `path`, `cycleway`) and `alley` service roads. By zoom 15 all service roads are added, including driveway, `parking_aisle`, `drive-through`.
+**Roads** from **OpenStreetMap** are shown starting at zoom 8 with `motorway`, `trunk`, `primary`. `secondary` are added starting at zoom 10, with `motorway_link`, `tertiary` added at zoom 11. Zoom 12 sees addition of `trunk_link`, `residential`, `unclassified`, and `road`, and internationally and nationally significant paths (`path`, `footway`, `steps`). Zoom 13 adds `primary_link`, `secondary_link`, `track`, `pedestrian`, `living_street`, and  `cycleway` and regionally significant and/or named or designated paths. Zoom 14 adds `tertiary_link`, all remaining `path`, `footway`, and `steps`, and `alley` service roads. By zoom 15 all remaining service roads are added, including `driveway`, `parking_aisle`, `drive-through`.
 
 **Roads** from **Natural Earth**  are used at low zooms below 8. Road `kind` values are limited to `Road` and `Ferry` at these zooms. It's more useful to look at `type` values: `Beltway`, `Bypass`, `Ferry Route`, `Ferry, seasonal`, `Major Highway`, `Road`, `Secondary Highway`, `Track`, and `Unknown`.
 
@@ -530,13 +528,15 @@ Mapzen calculates the composite exterior edge for overlapping water polygons and
 
 **Water kind values (point, polygon):**
 
-* `Alkaline Lake`, `basin`, `dock`, `lake`, `Lake`, `ocean`, `Ocean`, `playa`, `Playa`, `reservoir`, `Reservoir`, `riverbank`, `swimming_pool`, and `water`
+* `basin`, `dock`, `lake`, `ocean`, `playa`, `riverbank`, `swimming_pool`, and `water`
+
+Additionally, a `reservoir=yes` or `alkaline=yes` value can be present on the appropriate `kind=lake` features.
 
 **Water kind values (point only):**
 
 These are intended for label placement, and are included as points only.
 
-* `bay`, `fjord`, `strait`
+* `bay`, `fjord`, `strait`, `sea`
 
     Gotchas:
 

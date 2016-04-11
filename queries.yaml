@@ -12,7 +12,7 @@ layers:
   water:
     template: water.jinja2
     start_zoom: 0
-    geometry_types: [Polygon, MultiPolygon, LineString, MultiLineString]
+    geometry_types: [Point, MultiPoint, Polygon, MultiPolygon, LineString, MultiLineString]
     simplify_before_intersect: true
     simplify_start: 9
     transform:
@@ -96,7 +96,6 @@ layers:
       - TileStache.Goodies.VecTiles.transform.add_id_to_properties
       - TileStache.Goodies.VecTiles.transform.detect_osm_relation
       - TileStache.Goodies.VecTiles.transform.parse_layer_as_float
-      - TileStache.Goodies.VecTiles.transform.building_kind
       - TileStache.Goodies.VecTiles.transform.building_height
       - TileStache.Goodies.VecTiles.transform.building_min_height
       - TileStache.Goodies.VecTiles.transform.synthesize_volume
@@ -136,10 +135,9 @@ layers:
       - TileStache.Goodies.VecTiles.transform.tags_create_dict
       - TileStache.Goodies.VecTiles.transform.tags_name_i18n
       - TileStache.Goodies.VecTiles.transform.tags_remove
-      - TileStache.Goodies.VecTiles.transform.boundary_kind
+      - TileStache.Goodies.VecTiles.transform.admin_level_as_int
       - TileStache.Goodies.VecTiles.transform.add_id_to_properties
       - TileStache.Goodies.VecTiles.transform.detect_osm_relation
-      - TileStache.Goodies.VecTiles.transform.boundary_trim_properties
       - TileStache.Goodies.VecTiles.transform.remove_feature_id
   transit:
     template: transit.jinja2
@@ -383,7 +381,7 @@ post_process:
       end_zoom: 16
       properties: [name, ref, network]
       where: >-
-        (kind == 'path' and zoom < 16) or
+        (kind == 'path' and zoom < 14) or
         (kind == 'rail' and zoom < 15) or
         (kind == 'minor_road' and zoom < 14) or
         (kind == 'major_road' and zoom <  7) or
