@@ -208,15 +208,19 @@ Mapzen calculates the `landuse_kind` value by intercutting `buildings` with the 
 * Layer name: `earth`
 * Geometry types: `polygon`
 
-Polygons representing landmass. Uses coastline-derived land polygons from [openstreetmapdata.com](http://openstreetmapdata.com).
+Polygons representing earth landmass and natural feature lines. Uses coastline-derived land polygons from [openstreetmapdata.com](http://openstreetmapdata.com). Natural lines from OpenStreetMap representing cliffs, aretes. This layer also includes earth `label_placement` lines for ridges and valleys (which should not otherwise be symbolized).
 
 _Uses Natural Earth until zoom 8, then switches to OSM land at zoom 9+._
 
 **Earth properties:**
 
-* `id`: suspicious provenance
-* `land`: `base`
+* `id`: osm_id **or** funky value when from Natural Earth or OpenStreetMapData.com
+* `kind`: either `earth` or "natural" value from OSM tag.
 * `sort_key`: a suggestion for which order to draw features. The value is an integer where smaller numbers suggest that features should be "behind" features with larger numbers.
+
+**Earth kind values:**
+
+* `arete`, `cliff`, `earth`, `ridge`, and `valley`.
 
 ## Landuse
 
@@ -367,7 +371,7 @@ To improve performance, some road segments are merged at low and mid-zooms. To f
 * `name`: From OpenStreetMap, but transformed to abbreviated names as detailed above.
 * `id`: From OpenStreetMap or Natural Earth
 * `source`: `openstreetmap` or `naturalearthdata.com`
-* `kind`: one of High Road's values for `highway`, `major_road`, `minor_road`, `rail`, `path`, `ferry`, `piste`, `aerialway`, `exit` (eg: "motorway_junction"), `racetrack`; or Natural Earth's `featurecla` value. You'll want to look at other tags like `highway` and `railway` for raw OpenStreetMap values. At low zooms, Natural Earth `featurecla` kinds of `Road` and `Ferry` are used. Look to `type` for more fidelity.
+* `kind`: one of High Road's values for `highway`, `major_road`, `minor_road`, `rail`, `path`, `ferry`, `piste`, `aerialway`, `exit` (eg: "motorway_junction"), `racetrack`, `portage_way` if `whitewater=portage_way`; or Natural Earth's `featurecla` value. You'll want to look at other tags like `highway` and `railway` for raw OpenStreetMap values. At low zooms, Natural Earth `featurecla` kinds of `Road` and `Ferry` are used. Look to `type` for more fidelity.
 * `landuse_kind`: See description above, values match values in the `landuse` layer.
 * `ref`: Used for road shields. Related, see `symbol` for pistes.
 * `sort_key`: a suggestion for which order to draw features. The value is an integer where smaller numbers suggest that features should be "behind" features with larger numbers. At zooms >= 15, the `sort_key` is adjusted to realistically model bridge, tunnel, and layer ordering.
